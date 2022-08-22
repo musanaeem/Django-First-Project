@@ -24,7 +24,7 @@ def index(request):
     }
     return render(request, "profiles/index.html", context)
 
-def register_page(request):
+def register_user(request):
     form = CreateUserForm()
 
     if request.method == "POST":
@@ -35,11 +35,16 @@ def register_page(request):
             messages.success(request, "Account was created for" + user)
             return redirect("login")
 
+    for field in form:
+        widget = form.fields[field.name].widget
 
+        widget.attrs['placeholder'] = field.label
+        widget.attrs['class'] = 'form-control'
+     
     context = {"form":form}
     return render(request, "profiles/register.html", context)
 
-def login_page(request):
+def login_user(request):
     
     if request.method == "POST":
         username = request.POST.get("username")
@@ -50,10 +55,8 @@ def login_page(request):
         if user is not None:
             login(request, user)
             return redirect("home")
-        else:
-            messages.info(request, "Username or Password is incorrect")
+        messages.info(request, "Username or Password is incorrect")
         
-    context = {}
     return render(request, "profiles/login.html")
 
 def logout_user(request):
