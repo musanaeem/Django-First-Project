@@ -1,11 +1,11 @@
 import imp
-from django.forms import ModelForm
+from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from .. models import Bio
 
-class BioForm(UserCreationForm):
+class BioForm(forms.ModelForm):
     class Meta:
         model = Bio
         fields = "__all__"
