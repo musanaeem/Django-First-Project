@@ -25,7 +25,6 @@ def index(request):
     return render(request, "profiles/index.html", context)
 
 def register_user(request):
-    form = CreateUserForm()
 
     if request.method == "POST":
         form = CreateUserForm(request.POST)
@@ -34,6 +33,8 @@ def register_user(request):
             user = form.cleaned_data.get('username')
             messages.success(request, "Account was created for" + user)
             return redirect("login")
+
+    form = CreateUserForm()
 
     for field in form:
         widget = form.fields[field.name].widget
