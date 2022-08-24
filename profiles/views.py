@@ -19,8 +19,8 @@ def index(request):
     
     all_user_data = Bio.objects.all
     context = {
-    "users":all_user_data,
-    "form":form
+        "users": all_user_data,
+        "form": form
     }
     return render(request, "profiles/index.html", context)
 
@@ -42,7 +42,9 @@ def register_user(request):
         widget.attrs['placeholder'] = field.label
         widget.attrs['class'] = 'form-control'
      
-    context = {"form":form}
+    context = {
+        "form": form
+        }
     return render(request, "profiles/register.html", context)
 
 def login_user(request):
