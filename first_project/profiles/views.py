@@ -10,7 +10,7 @@ def index(request):
 
     all_user_data = Bio.objects.all
     context = {
-    "users":all_user_data,
+    "users": all_user_data,
     }
     return render(request, "profiles/index.html", context)
 
@@ -32,7 +32,9 @@ def register_user(request):
         widget.attrs['placeholder'] = field.label
         widget.attrs['class'] = 'form-control'
      
-    context = {"form":form}
+    context = {
+        "form":form
+        }
     return render(request, "profiles/register.html", context)
 
 def login_user(request):
@@ -65,7 +67,10 @@ def create_record(request):
             return redirect("home")
     
     form = BioForm()
-    context = {"form":form}
+    context = {
+        "form": form
+    }
+
     return render(request, "profiles/create.html", context)
 
 def update_record(request, username):
@@ -81,7 +86,7 @@ def update_record(request, username):
                 return redirect("home")
     
     context = {
-    "form":form
+        "form": form
     }
 
     return render(request, "profiles/update.html", context)
@@ -93,7 +98,7 @@ def delete_record(request, username):
         selected_user_data.delete()
     
     context = {
-    "record":selected_user_data
+        "record": selected_user_data
     }
 
     return render(request, "profiles/delete.html", context)
